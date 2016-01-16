@@ -466,4 +466,48 @@ class EnvironmentTest extends \PHPUnit_Framework_TestCase
         preg_match($regex, $test, $matches);
         $this->assertSame($test, $matches[0]);
     }
+
+    public function testGetBlockRendererForSubClass()
+    {
+        $environment = new Environment();
+        $mockRenderer = $this->getMock('League\CommonMark\Block\Renderer\BlockRendererInterface');
+        $environment->addBlockRenderer('League\CommonMark\Tests\Unit\EnvironmentTest\FakeBlock1', $mockRenderer);
+
+        $actualRenderer = $environment->getBlockRendererForClass('League\CommonMark\Tests\Unit\EnvironmentTest\FakeBlock3');
+
+        $this->assertSame($mockRenderer, $actualRenderer);
+    }
+
+    public function testGetBlockRendererForUnknownClass()
+    {
+        $environment = new Environment();
+        $mockRenderer = $this->getMock('League\CommonMark\Block\Renderer\BlockRendererInterface');
+        $environment->addBlockRenderer('League\CommonMark\Tests\Unit\EnvironmentTest\FakeBlock3', $mockRenderer);
+
+        $actualRenderer = $environment->getBlockRendererForClass('League\CommonMark\Tests\Unit\EnvironmentTest\FakeBlock1');
+
+        $this->assertNull($actualRenderer);
+    }
+
+    public function testGetInlineRendererForSubClass()
+    {
+        $environment = new Environment();
+        $mockRenderer = $this->getMock('League\CommonMark\Inline\Renderer\InlineRendererInterface');
+        $environment->addInlineRenderer('League\CommonMark\Tests\Unit\EnvironmentTest\FakeInline1', $mockRenderer);
+
+        $actualRenderer = $environment->getInlineRendererForClass('League\CommonMark\Tests\Unit\EnvironmentTest\FakeInline3');
+
+        $this->assertSame($mockRenderer, $actualRenderer);
+    }
+
+    public function testGetInlineRendererForUnknownClass()
+    {
+        $environment = new Environment();
+        $mockRenderer = $this->getMock('League\CommonMark\Inline\Renderer\InlineRendererInterface');
+        $environment->addInlineRenderer('League\CommonMark\Tests\Unit\EnvironmentTest\FakeInline3', $mockRenderer);
+
+        $actualRenderer = $environment->getInlineRendererForClass('League\CommonMark\Tests\Unit\EnvironmentTest\FakeInline1');
+
+        $this->assertNull($actualRenderer);
+    }
 }
