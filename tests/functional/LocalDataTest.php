@@ -45,7 +45,7 @@ class LocalDataTest extends TestCase
     {
         $actualResult = $this->converter->convertToHtml($markdown);
 
-        $failureMessage = sprintf('Unexpected result for "%s" test', $testName);
+        $failureMessage = \sprintf('Unexpected result for "%s" test', $testName);
         $failureMessage .= "\n=== markdown ===============\n" . $markdown;
         $failureMessage .= "\n=== expected ===============\n" . $html;
         $failureMessage .= "\n=== got ====================\n" . $actualResult;
@@ -70,7 +70,7 @@ class LocalDataTest extends TestCase
         foreach ($finder as $markdownFile) {
             $testName = $markdownFile->getBasename('.md');
             $markdown = $markdownFile->getContents();
-            $html = file_get_contents(__DIR__ . '/data/' . $testName . '.html');
+            $html = \file_get_contents(__DIR__ . '/data/' . $testName . '.html');
 
             $ret[] = [$markdown, $html, $testName];
         }

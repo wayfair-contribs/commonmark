@@ -38,8 +38,8 @@ abstract class AbstractSpecTest extends TestCase
     public function testSpecExample($markdown, $html)
     {
         // Replace visible tabs in spec
-        $markdown = str_replace('→', "\t", $markdown);
-        $html = str_replace('→', "\t", $html);
+        $markdown = \str_replace('→', "\t", $markdown);
+        $html = \str_replace('→', "\t", $html);
 
         $actualResult = $this->converter->convertToHtml($markdown);
 
@@ -53,15 +53,15 @@ abstract class AbstractSpecTest extends TestCase
 
     public function dataProvider()
     {
-        if (($data = file_get_contents($this->getFileName())) === false) {
+        if (($data = \file_get_contents($this->getFileName())) === false) {
             $this->fail('Could not load tests from ' . $this->getFileName());
         }
 
         $matches = [];
         // Normalize newlines for platform independence
-        $data = preg_replace('/\r\n?/', "\n", $data);
-        $data = preg_replace('/<!-- END TESTS -->.*$/', '', $data);
-        preg_match_all('/^`{32} example\n([\s\S]*?)^\.\n([\s\S]*?)^`{32}$|^#{1,6} *(.*)$/m', $data, $matches, PREG_SET_ORDER);
+        $data = \preg_replace('/\r\n?/', "\n", $data);
+        $data = \preg_replace('/<!-- END TESTS -->.*$/', '', $data);
+        \preg_match_all('/^`{32} example\n([\s\S]*?)^\.\n([\s\S]*?)^`{32}$|^#{1,6} *(.*)$/m', $data, $matches, PREG_SET_ORDER);
 
         $examples = [];
         $currentSection = 'Example';
@@ -73,10 +73,10 @@ abstract class AbstractSpecTest extends TestCase
             } else {
                 $exampleNumber++;
 
-                $testName = trim($currentSection . ' #' . $exampleNumber);
+                $testName = \trim($currentSection . ' #' . $exampleNumber);
 
                 $markdown = $match[1];
-                $markdown = str_replace('→', "\t", $markdown);
+                $markdown = \str_replace('→', "\t", $markdown);
 
                 yield $testName => [
                     'markdown' => $markdown,
@@ -95,8 +95,8 @@ abstract class AbstractSpecTest extends TestCase
      */
     private function showSpaces($str)
     {
-        $str = str_replace("\t", '→', $str);
-        $str = str_replace(' ', '␣', $str);
+        $str = \str_replace("\t", '→', $str);
+        $str = \str_replace(' ', '␣', $str);
 
         return $str;
     }

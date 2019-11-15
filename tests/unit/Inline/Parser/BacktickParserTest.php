@@ -42,7 +42,7 @@ class BacktickParserTest extends TestCase
         $inlineContext = new InlineParserContext($nodeStub, $this->createMock(ReferenceMapInterface::class));
 
         // Move to just before the first backtick
-        $firstBacktickPos = mb_strpos($string, '`', null, 'utf-8');
+        $firstBacktickPos = \mb_strpos($string, '`', null, 'utf-8');
         $inlineContext->getCursor()->advanceBy($firstBacktickPos);
 
         $parser = new BacktickParser();

@@ -25,7 +25,7 @@ class EmphasisTest extends AbstractBinTest
      */
     protected function getPathToData($file)
     {
-        return realpath(__DIR__ . '/data/emphasis/' . $file);
+        return \realpath(__DIR__ . '/data/emphasis/' . $file);
     }
 
     /**
@@ -38,8 +38,8 @@ class EmphasisTest extends AbstractBinTest
         $cmd->execute();
 
         $this->assertEquals(0, $cmd->getExitCode());
-        $expectedContents = trim(file_get_contents($this->getPathToData('emstrong.html')));
-        $this->assertEquals($expectedContents, trim($cmd->getOutput()));
+        $expectedContents = \trim(\file_get_contents($this->getPathToData('emstrong.html')));
+        $this->assertEquals($expectedContents, \trim($cmd->getOutput()));
     }
 
     /**
@@ -53,8 +53,8 @@ class EmphasisTest extends AbstractBinTest
         $cmd->execute();
 
         $this->assertEquals(0, $cmd->getExitCode());
-        $expectedContents = trim(file_get_contents($this->getPathToData('em.html')));
-        $this->assertEquals($expectedContents, trim($cmd->getOutput()));
+        $expectedContents = \trim(\file_get_contents($this->getPathToData('em.html')));
+        $this->assertEquals($expectedContents, \trim($cmd->getOutput()));
     }
 
     /**
@@ -68,8 +68,8 @@ class EmphasisTest extends AbstractBinTest
         $cmd->execute();
 
         $this->assertEquals(0, $cmd->getExitCode());
-        $expectedContents = trim(file_get_contents($this->getPathToData('strong.html')));
-        $this->assertEquals($expectedContents, trim($cmd->getOutput()));
+        $expectedContents = \trim(\file_get_contents($this->getPathToData('strong.html')));
+        $this->assertEquals($expectedContents, \trim($cmd->getOutput()));
     }
 
     /**
@@ -84,8 +84,8 @@ class EmphasisTest extends AbstractBinTest
         $cmd->execute();
 
         $this->assertEquals(0, $cmd->getExitCode());
-        $expectedContents = trim(file_get_contents($this->getPathToData('disabled.html')));
-        $this->assertEquals($expectedContents, trim($cmd->getOutput()));
+        $expectedContents = \trim(\file_get_contents($this->getPathToData('disabled.html')));
+        $this->assertEquals($expectedContents, \trim($cmd->getOutput()));
     }
 
     /**
@@ -99,8 +99,8 @@ class EmphasisTest extends AbstractBinTest
         $cmd->execute();
 
         $this->assertEquals(0, $cmd->getExitCode());
-        $expectedContents = trim(file_get_contents($this->getPathToData('asterisks.html')));
-        $this->assertEquals($expectedContents, trim($cmd->getOutput()));
+        $expectedContents = \trim(\file_get_contents($this->getPathToData('asterisks.html')));
+        $this->assertEquals($expectedContents, \trim($cmd->getOutput()));
     }
 
     /**
@@ -114,7 +114,7 @@ class EmphasisTest extends AbstractBinTest
         $cmd->execute();
 
         $this->assertEquals(0, $cmd->getExitCode());
-        $expectedContents = trim(file_get_contents($this->getPathToData('underscores.html')));
-        $this->assertEquals($expectedContents, trim($cmd->getOutput()));
+        $expectedContents = \trim(\file_get_contents($this->getPathToData('underscores.html')));
+        $this->assertEquals($expectedContents, \trim($cmd->getOutput()));
     }
 }

@@ -30,7 +30,7 @@ class BinTest extends AbstractBinTest
         $this->assertEquals(1, $cmd->getExitCode());
         $this->assertEmpty($cmd->getOutput());
 
-        if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
+        if (\strtoupper(\substr(PHP_OS, 0, 3)) !== 'WIN') {
             $this->assertContains('Usage:', $cmd->getError());
         }
     }
@@ -72,7 +72,7 @@ class BinTest extends AbstractBinTest
 
         $this->assertEquals(1, $cmd->getExitCode());
 
-        if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
+        if (\strtoupper(\substr(PHP_OS, 0, 3)) !== 'WIN') {
             $this->assertContains('Unknown option', $cmd->getError());
         }
     }
@@ -87,7 +87,7 @@ class BinTest extends AbstractBinTest
         $cmd->execute();
 
         $this->assertEquals(0, $cmd->getExitCode());
-        $expectedContents = trim(file_get_contents($this->getPathToData('atx_heading.html')));
+        $expectedContents = \trim(\file_get_contents($this->getPathToData('atx_heading.html')));
         $this->assertEquals($expectedContents, $cmd->getOutput());
     }
 
@@ -96,15 +96,15 @@ class BinTest extends AbstractBinTest
      */
     public function testStdin()
     {
-        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+        if (\strtoupper(\substr(PHP_OS, 0, 3)) === 'WIN') {
             $this->markTestSkipped('Test skipped: STDIN is not supported on Windows');
         }
 
-        $cmd = new Command(sprintf('cat %s | %s ', $this->getPathToData('atx_heading.md'), $this->getPathToCommonmark()));
+        $cmd = new Command(\sprintf('cat %s | %s ', $this->getPathToData('atx_heading.md'), $this->getPathToCommonmark()));
         $cmd->execute();
 
         $this->assertEquals(0, $cmd->getExitCode());
-        $expectedContents = trim(file_get_contents($this->getPathToData('atx_heading.html')));
+        $expectedContents = \trim(\file_get_contents($this->getPathToData('atx_heading.html')));
         $this->assertEquals($expectedContents, $cmd->getOutput());
     }
 
@@ -118,7 +118,7 @@ class BinTest extends AbstractBinTest
         $cmd->execute();
 
         $this->assertEquals(0, $cmd->getExitCode());
-        $expectedContents = trim(file_get_contents($this->getPathToData('safe/unsafe_output.html')));
+        $expectedContents = \trim(\file_get_contents($this->getPathToData('safe/unsafe_output.html')));
         $this->assertEquals($expectedContents, $cmd->getOutput());
     }
 
@@ -133,7 +133,7 @@ class BinTest extends AbstractBinTest
         $cmd->execute();
 
         $this->assertEquals(0, $cmd->getExitCode());
-        $expectedContents = trim(file_get_contents($this->getPathToData('safe/safe_output.html')));
+        $expectedContents = \trim(\file_get_contents($this->getPathToData('safe/safe_output.html')));
         $this->assertEquals($expectedContents, $cmd->getOutput());
     }
 
@@ -148,7 +148,7 @@ class BinTest extends AbstractBinTest
             $cmd->execute();
 
             $this->assertEquals(0, $cmd->getExitCode());
-            $this->assertEquals(CommonMarkConverter::VERSION, trim($cmd->getOutput()));
+            $this->assertEquals(CommonMarkConverter::VERSION, \trim($cmd->getOutput()));
         }
     }
 
@@ -161,6 +161,6 @@ class BinTest extends AbstractBinTest
      */
     protected function getPathToData($file)
     {
-        return realpath(__DIR__ . '/data/' . $file);
+        return \realpath(__DIR__ . '/data/' . $file);
     }
 }

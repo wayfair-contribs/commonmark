@@ -21,7 +21,7 @@ abstract class AbstractBinTest extends TestCase
      */
     protected function getPathToCommonmark()
     {
-        return realpath(__DIR__ . '/../../bin/commonmark');
+        return \realpath(__DIR__ . '/../../bin/commonmark');
     }
 
     /**

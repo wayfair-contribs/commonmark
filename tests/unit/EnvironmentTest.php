@@ -196,7 +196,7 @@ class EnvironmentTest extends TestCase
         $environment->addInlineParser($parser);
         $environment->getInlineParsersForCharacter('/');
 
-        $this->assertEquals(1, preg_match($environment->getInlineParserCharacterRegex(), 'foo/bar'));
+        $this->assertEquals(1, \preg_match($environment->getInlineParserCharacterRegex(), 'foo/bar'));
     }
 
     /**
@@ -336,7 +336,7 @@ class EnvironmentTest extends TestCase
 
         $test = '*This* should match **everything** including chars like `[`.';
         $matches = [];
-        preg_match($regex, $test, $matches);
+        \preg_match($regex, $test, $matches);
         $this->assertSame($test, $matches[0]);
     }
 
@@ -366,7 +366,7 @@ class EnvironmentTest extends TestCase
         $environment->addBlockParser($parser2, 50);
         $environment->addBlockParser($parser3);
 
-        $parsers = iterator_to_array($environment->getBlockParsers());
+        $parsers = \iterator_to_array($environment->getBlockParsers());
 
         $this->assertSame($parser2, $parsers[0]);
         $this->assertSame($parser1, $parsers[1]);
@@ -388,7 +388,7 @@ class EnvironmentTest extends TestCase
         $environment->addInlineParser($parser2, 50);
         $environment->addInlineParser($parser3);
 
-        $parsers = iterator_to_array($environment->getInlineParsersForCharacter('a'));
+        $parsers = \iterator_to_array($environment->getInlineParsersForCharacter('a'));
 
         $this->assertSame($parser2, $parsers[0]);
         $this->assertSame($parser1, $parsers[1]);
@@ -407,7 +407,7 @@ class EnvironmentTest extends TestCase
         $environment->addBlockRenderer('foo', $renderer2, 50);
         $environment->addBlockRenderer('foo', $renderer3);
 
-        $parsers = iterator_to_array($environment->getBlockRenderersForClass('foo'));
+        $parsers = \iterator_to_array($environment->getBlockRenderersForClass('foo'));
 
         $this->assertSame($renderer2, $parsers[0]);
         $this->assertSame($renderer1, $parsers[1]);
@@ -426,7 +426,7 @@ class EnvironmentTest extends TestCase
         $environment->addInlineRenderer('foo', $renderer2, 50);
         $environment->addInlineRenderer('foo', $renderer3);
 
-        $parsers = iterator_to_array($environment->getInlineRenderersForClass('foo'));
+        $parsers = \iterator_to_array($environment->getInlineRenderersForClass('foo'));
 
         $this->assertSame($renderer2, $parsers[0]);
         $this->assertSame($renderer1, $parsers[1]);

@@ -22,7 +22,7 @@ class PrioritizedListTest extends TestCase
         $list->add('foo', 0);
         $list->add('bar', 0);
 
-        $items = iterator_to_array($list->getIterator());
+        $items = \iterator_to_array($list->getIterator());
 
         $this->assertCount(2, $items);
 
@@ -37,7 +37,7 @@ class PrioritizedListTest extends TestCase
         $list->add('bar', 100);
         $list->add('baz', -20);
 
-        $items = iterator_to_array($list->getIterator());
+        $items = \iterator_to_array($list->getIterator());
 
         $this->assertCount(3, $items);
 
